@@ -2,8 +2,7 @@ import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-load
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
-
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import { ThemeDefinition, VuetifyOptions } from "vuetify";
 import { ar, en } from "vuetify/locale";
 
@@ -55,7 +54,7 @@ const locale = {
   messages,
 };
 const theme = {
-  defaultTheme: "dark",
+  defaultTheme: "light",
   themes: { light, dark },
 };
 
@@ -66,11 +65,11 @@ const vuetifyOptions: VuetifyOptions = {
   theme,
   locale,
   icons: {
-    defaultSet: "mdi",
+    defaultSet: 'mdi',
     aliases,
     sets: {
       mdi,
-    },
+    }
   },
 };
 

@@ -13,26 +13,21 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: 'var(--primary)',
-          dark: 'var(--primary-dark)',
-          light: 'var(--primary-light)',
         },
         secondary: {
           DEFAULT: 'var(--secondary)',
-          dark: 'var(--secondary-dark)',
-          light: 'var(--secondary-light)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent)',
         },
         text: {
-          DEFAULT: 'var(--text)',
-          dark: 'var(--text-dark)',
-          light: 'var(--text-light)',
+          DEFAULT: 'var(--primary)',
         },
         bg: {
           DEFAULT: 'var(--bg)',
-          dark: 'var(--bg-dark)',
-          light: 'var(--bg-light)',
         },
         border: {
-          DEFAULT: 'var(--border)',
+          DEFAULT: 'var(--primary)',
         }
 
       },
