@@ -1,155 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('~assets/fonts/poppins/Poppins-Light.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('~assets/fonts/poppins/Poppins-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('~assets/fonts/poppins/Poppins-SemiBold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('~assets/fonts/poppins/Poppins-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: Almarai;
-  src: url('./assets/fonts/almarai/Almarai-Regular.ttf');
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: Almarai;
-  src: url('./assets/fonts/almarai/Almarai-Bold.ttf');
-  font-weight: 700;
-}
-
-#app {
-  position: relative;
-}
-
-/* *** RESET CODE *** */
-
-*,
-*::after,
-*::before {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
-/* DON'T CHANGE DEFAULT COLORS  */
 :root {
-  --color-primary: #9f762b;
-  --color-primary-light: #c49743;
-  --color-primary-dark: #9b7029;
+  --primary: #0f141e;
+  --primary-rgb: 15, 20, 30;
 
-  --color-secondary: #163265;
-  --color-secondary-light: #274e95;
-  --color-secondary-dark: #163265;
+  --secondary: #878a8f;
+  --secondary-rgb: 135, 138, 143;
 
-  --color-text: #757577;
-  --color-text-light: #8c8c90;
-  --color-text-dark: #535259;
+  --accent: #82b1ff;
+  --accent-rgb: 130, 177, 255;
 
-  --color-bg: #ffff;
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #e5e3e3;
+  --bg: #FFFFFF;
+  --bg-rgb: 255, 255, 255;
 
-  --color-error: #9f2b2b;
-  --color-warning: #faad14;
-  --color-success: #4e8d12;
+  --info: #1491e6;
+  --info-rgb: 20, 145, 230;
 
-  --color-border: #f4f4f5;
+  --error: #9f2b2b;
+  --error-rgb: 159, 43, 43;
 
-  --font-en: 'Cairo', sans-serif;
-  --font-ar: 'Almarai', 'Poppins', sans-serif;
-  --font-bebas: 'Bebas Neue', cursive;
-  --font-base-size: 16px;
+  --warning: #faad14;
+  --warning-rgb: 250, 173, 20;
+
+  --success: #4e8d12;
+  --success-rgb: 78, 141, 18;
+
+  --font-ar: 'Cairo';
+  --font-en: 'Montserrat', sans-serif;
+
+  --font-base-size: 1rem;
+
+  --font-sm-size: 0.8rem;
+  --font-xsm-size: 0.7rem;
+
+  --font-lg-size: 1.7rem;
+  --font-xlg-size: 2.1rem;
 }
 
 .dark {
-  --color-text: #d3d3d3;
-  --color-text-light: #afafaf;
-  --color-text-dark: #f0f0f0;
+  --primary: #FFFFFF;
+  --primary-rgb: 255, 255, 255;
 
-  --color-bg: #121212;
-  /* DON'T CHANGE DEFAULT COLORS  */
-  --color-bg-light: #0c0c0c;
-  /* *************************** */
-  --color-bg-dark: #383838;
+  --secondary: #e0e0e0;
+  --secondary-rgb: 224, 224, 224;
 
-  --color-border: #46484a;
-}
-
-::selection {
-  background-color: var(--color-primary);
-  color: #ffffff;
+  --bg: #0c0c0c;
+  --bg-rgb: 12, 12, 12;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-.v-application,
-body,
-html {
-  /*   BASE FONT SIZE */
-
-  font-size: var(--font-base-size) !important;
-  font-family: var(--font-en) !important;
-  font-family: 'Cairo', sans-serif !important;
-  font-weight: 300 !important;
-  letter-spacing: 0px !important;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-size: var(--font-base-size);
   text-align: start;
+  background-color: var(--bg);
 }
 
 html[dir='rtl'],
-[dir='rtl'] body,
-[dir='rtl'] .v-application {
-  font-family: var(--font-ar);
+html[lang='ar'] {
+  font-family: var(--font-ar) !important;
+}
+html[dir='ltr'],
+html[lang='en'] {
+  font-family: var(--font-en) !important;
 }
 
+
 @media only screen and (max-width: 992px) {
+
   .v-application,
   body,
   html {
-    font-size: 14px !important;
+    font-size: var(--font-sm-size) !important;
   }
 }
 
 @media only screen and (max-width: 768px) {
+
   .v-application,
   body,
   html {
-    font-size: 13px !important;
+    font-size: var(--font-xsm-size) !important;
   }
 }
 
@@ -164,37 +103,22 @@ a {
   margin: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: bold !important;
-  color: var(--color-text-dark);
-}
-
-/* ## PLEASE CHANGE THIS BY USING CUSTUM CLASSES FOR HEADERS  */
 
 /* ######################### */
 
 p {
-  font-size: 1rem;
+  font-size: var(--font-base-size);
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0rem;
 }
 
 a {
   text-decoration: none;
   display: inline-block;
-}
-
-.v-main {
-  /* padding: 0 !important; */
-}
-
-.container--fluid.container {
-  width: 100%;
-  max-width: 100%;
-  padding-inline: 0;
 }
 
 .text-start {
@@ -203,51 +127,4 @@ a {
 
 .text-end {
   text-align: end;
-}
-
-html {
-  overflow: auto;
-}
-
-.v-menu__content.menuable__content__active {
-  /* margin-top: 30px; */
-}
-
-@media (min-width: 1264px) {
-  .container {
-    max-width: 1300px;
-  }
-}
-
-.select-country-container input  {
-  background: transparent !important;
-  height: 48px !important;
-  color: var(--primary-color) !important;
-  border: 1px solid #3F3E3D !important;
-}
-.input-phone-number input {
-  background-color: transparent !important;
-  height: 48px !important;
-  color: var(--primary-color) !important;
-  border: 1px solid #3F3E3D !important;
-}
-.login_page input:-webkit-autofill,
-.login_page input:-webkit-autofill:hover,
-.login_page input:-webkit-autofill:focus,
-.login_page input:-webkit-autofill:active{
-  -webkit-text-fill-color: var(--primary-color);
-  -webkit-box-shadow: 0 0 0px 1000px #0c0c0c inset;
-  transition: background-color 5000s ease-in-out 0s;
-}
-.influncer_Signup input:-webkit-autofill,
-.influncer_Signup input:-webkit-autofill:hover,
-.influncer_Signup input:-webkit-autofill:focus,
-.influncer_Signup input:-webkit-autofill:active,
-.brand_Signup input:-webkit-autofill,
-.brand_Signup input:-webkit-autofill:hover,
-.brand_Signup input:-webkit-autofill:focus,
-.brand_Signup input:-webkit-autofill:active{
-  -webkit-text-fill-color: var(--primary-color);
-  -webkit-box-shadow: 0 0 0px 1000px #0c0c0c inset;
-  transition: background-color 5000s ease-in-out 0s;
 }

@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
 export default defineNuxtConfig({
-  css: ["vuetify/styles",'@/assets/main.css'],
+  css: ["vuetify/styles", "@/assets/main.css"],
   vite: {
     // @ts-ignore
     // curently this will lead to a type error, but hopefully will be fixed soon #justBetaThings

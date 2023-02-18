@@ -1,8 +1,7 @@
 <template>
-  <div class="bg-black text-center">
-    <div class="text-center text-primary">homepage</div>
-    <!-- <v-icon icon="home" /> -->
-  </div>
+  <h2>
+    هاااي
+  </h2>
   <v-alert
     type="error"
     title="Alert title"

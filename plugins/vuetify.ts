@@ -13,44 +13,49 @@ const light: ThemeDefinition = {
     background: "#FFFFFF",
     surface: "#FFFFFF",
 
-    primary: "#c8a45d",
+    primary: "#0f141e",
+    secondary: "#878a8f",
+
     accent: "#82b1ff",
-    secondary: "#220054",
+
     info: "#1491e6",
     warning: "#ffc107",
     error: "#e83a3a",
     success: "#4caf50",
+
     btn: "#220054",
     lightPrimary: "#57407a",
     midGray: "#6b7280",
     darkPrimary: "#1B2534",
     lightDark: "#383e43",
     subtitle: "#777E90",
-    cardPrimary: "#fff",
-    light: "#ffffff",
+    cardPrimary: "#FFFFFF",
+    light: "#FFFFFF",
   },
 };
 const dark: ThemeDefinition = {
   dark: true,
   colors: {
-    primary: "#c8a45d",
-    accent: "#82b1ff",
-    secondary: "#220054",
+    background: "#0c0c0c",
+    surface: "#0c0c0c",
+
+    primary: "#FFFFFF",
+    secondary: "#e0e0e0",
+
     title: "#fff",
-    cardPrimary: "#0C0C0C",
-    background: "#0C0C0C",
-    light: "#0C0C0C",
+    cardPrimary: "#0c0c0c",
+    light: "#0c0c0c",
   },
 };
 const messages = { ar, en };
 
 const locale = {
-  locale: "en",
-  fallback: "ar",
+  locale: "ar",
+  fallback: "en",
   messages,
 };
 const theme = {
-  defaultTheme: "light",
+  defaultTheme: "dark",
   themes: { light, dark },
 };
 
@@ -69,8 +74,7 @@ const vuetifyOptions: VuetifyOptions = {
   },
 };
 
-export default defineNuxtPlugin(({ vueApp, provide }) => {
-  const vuetify = createVuetify(vuetifyOptions);
-  vueApp.use(vuetify);
+export default defineNuxtPlugin(({ vueApp, provide }: any) => {
+  vueApp.use(createVuetify(vuetifyOptions));
   // provide("vuetify", vuetify);
 });
