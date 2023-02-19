@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Toolbar from "~~/components/shared/Toolbar.vue";
+import Toolbar from "~~/components/website/shared/Toolbar.vue";
 useHead({
   title: "nuxt3-startupkit",
 });

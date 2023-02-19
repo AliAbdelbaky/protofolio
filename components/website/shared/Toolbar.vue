@@ -1,7 +1,7 @@
 <template>
   <v-toolbar
     density="comfortable"
-    class="bg-transparent pt-8 px-7 pb-4 !sticky top-0 z-40"
+    class="bg-transparent pt-8 px-7 pb-4 !fixed w-full top-0 z-40"
     style="transition: all 0.1s ease-in-out"
     :class="{ '--scroll': scrollPosition > 50 }"
   >
@@ -57,15 +57,6 @@
             ></i>
           </b>
         </div>
-        <!-- <v-btn icon>
-         <v-icon>mdi-magnify</v-icon>
-       </v-btn>
-       <v-btn icon @click="setlang(locale == 'ar' ? 'en' : 'ar')">
-             {{ locale == "ar" ? "en" : "ar" }}
-           </v-btn>
-       <v-btn icon @click="toggleTheme">
-         <v-icon> mdi-theme-light-dark </v-icon>
-       </v-btn> -->
       </div>
     </nav>
   </v-toolbar>
