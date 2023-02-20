@@ -90,9 +90,9 @@ const initAnimation = () => {
   gsap.set(pInfo.querySelectorAll(".text-container"), {
     zIndex: (i, target, targets) => targets.length - i,
   });
-  let texts = gsap.utils.toArray(pInfo.querySelectorAll(".text-container"));
+  let textArray = gsap.utils.toArray(pInfo.querySelectorAll(".text-container"));
 
-  texts.forEach((text, i) => {
+  textArray.forEach((text, i) => {
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -103,7 +103,7 @@ const initAnimation = () => {
         invalidateOnRefresh: true,
       },
     });
-    if (text.length - 1 !== i) {
+    if (textArray.length - 1 !== i) {
       tl.addLabel(`text${i}`)
         .to(text, { duration: 0.33, opacity: 1, y: "0%" })
         .to(text, { duration: 0.33, opacity: 0, y: "0%" }, 0.66);
@@ -129,6 +129,18 @@ const projects = ref([
     role: "Frontend Developer",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, eaque?",
     imgs: [mobile1, mobile2, mobile3, mobile4],
+  },
+  {
+    name: "Grand community",
+    role: "Frontend Developer",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, eaque?",
+    imgs: [mobile4, mobile1, mobile3, mobile2],
+  },
+  {
+    name: "Grand community",
+    role: "Frontend Developer",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, eaque?",
+    imgs: [mobile4, mobile1, mobile3, mobile2],
   },
   {
     name: "Grand community",
