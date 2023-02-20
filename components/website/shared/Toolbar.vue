@@ -78,6 +78,6 @@ onMounted(() => {
   padding-top: 1rem !important;
   padding-left: 1rem !important;
   padding-right: 1rem !important;
-  backdrop-filter: blur(2px);
+  //backdrop-filter: blur(2px);
 }
 </style>

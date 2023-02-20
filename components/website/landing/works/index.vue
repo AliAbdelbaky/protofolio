@@ -2,27 +2,36 @@
   <section class="mywork mt-4" ref="myWork">
     <v-container fluid>
       <MainTitle title="My Projects" subtitle="Selected Projects" />
-      <div class="wrapper flex gap-1 mt-5">
-        <div class="projects-info flex-1">
-          <div class="p">
-            <div class="sort py-8 px-4 font-bold">01</div>
+      <div class="wrapper flex gap-1 mt-8 h-screen">
+        <div class="projects-info flex-1 relative overflow-hidden h-[80vh]">
+          <div
+            v-for="(item, index) in projects"
+            :key="`p-info${index}`"
+            class="text-container absolute top-0 w-full h-full translate-y-[100%]"
+            :class="{ last: projects.length - 1 == index }"
+          >
+            <div class="sort py-8 px-4 font-bold">{{ `0${index + 1}` }}</div>
             <div
               class="info flex flex-col flex-nowrap"
               style="padding: 5% 5% 5% 10%"
             >
-              <h2 class="text-7xl font-semibold mb-5">Grand Community</h2>
-              <h5 class="text-5xl mb-5">Frontend</h5>
+              <h2 class="text-7xl font-semibold mb-5">{{ item.name }}</h2>
+              <h5 class="text-5xl mb-5">{{ item.role }}</h5>
               <p class="text-2xl">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
-                eaque?
+                {{ item.desc }}
               </p>
             </div>
           </div>
         </div>
-        <div class="projects-imgs flex-1">
-          <div class="p-1 h-screen relative">
+        <div class="projects-imgs flex-1 relative overflow-hidden h-[80vh]">
+          <div
+            v-for="(project, index) in projects"
+            :key="`p-imgs${index}`"
+            class="img-container absolute w-full h-full overflow-hidden"
+            :class="{ last: projects.length - 1 == index }"
+          >
             <img
-              v-for="(item, index) in images"
+              v-for="(item, index) in project.imgs"
               :key="index"
               :src="item"
               alt="my projects"
@@ -50,34 +59,84 @@ const initAnimation = () => {
   const section = myWork.value.querySelector(".wrapper");
   const pInfo = section.querySelector(".projects-info");
   const pImgs = section.querySelector(".projects-imgs");
-  gsap.set(section, { autoAlpha: 0, yPercent: -5 });
-  let tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: myWork.value,
-      start: "top +=200", // when the top of the trigger hits the top of the viewport
-        end: "bottom +=200", // end after scrolling 500px beyond the start
-      scrub: 3, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar,
-      markers: true,
-      pin:true,
-      snap: false,
-      onUpdate: () => {
-        console.log("sss");
-      },
-    },
-  });
-  tl.to(section, 0.1, { yPercent: 0, autoAlpha: 1 });
-  tl.to(pInfo, 0.1, { yPercent: 0, autoAlpha: 1 });
-  tl.to(pImgs, 0.1, { yPercent: 0, autoAlpha: 1 });
-  // pImgs.querySelectorAll("img").forEach((element) => {
-  //   tl.to(
-  //     element,
-  //     0.1,
-  //     { yPercent: "-100%", autoAlpha: 1 },
-  //     `-=${Number(element.getAttribute("data-delay") + 1)}`
-  //   );
+  // let bodyScrollBar = Scrollbar.init(document.body, {
+  //   damping: 0.1,
+  //   delegateTo: document,
   // });
+  gsap.set(pImgs.querySelectorAll(".img-container"), {
+    zIndex: (i, target, targets) => targets.length - i,
+  });
+
+  let images = gsap.utils.toArray(
+    pImgs.querySelectorAll(".img-container:not(.last)")
+  );
+
+  images.forEach((image, i) => {
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: () => "top -" + window.innerHeight * (i + 0.5),
+        end: () => "+=" + window.innerHeight,
+        scrub: true,
+        toggleActions: "play none reverse none",
+        invalidateOnRefresh: true,
+      },
+    });
+
+    tl.to(image, { height: 0 });
+  });
+
+  //- text aniamtion
+  gsap.set(pInfo.querySelectorAll(".text-container"), {
+    zIndex: (i, target, targets) => targets.length - i,
+  });
+  let texts = gsap.utils.toArray(pInfo.querySelectorAll(".text-container"));
+
+  texts.forEach((text, i) => {
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: () => "top -" + window.innerHeight * i,
+        end: () => "+=" + window.innerHeight,
+        scrub: true,
+        toggleActions: "play none reverse none",
+        invalidateOnRefresh: true,
+      },
+    });
+    if (text.length - 1 !== i) {
+      tl.addLabel(`text${i}`)
+        .to(text, { duration: 0.33, opacity: 1, y: "0%" })
+        .to(text, { duration: 0.33, opacity: 0, y: "0%" }, 0.66);
+    } else {
+      tl.addLabel(`text${i}`).to(text, { duration: 0.33, opacity: 1, y: "0%" });
+    }
+  });
+  ScrollTrigger.create({
+    trigger: section,
+    scrub: true,
+    markers: true,
+    pin: true,
+    snap: "labelsDirectional",
+    start: () => "top top",
+    end: () => "+=" + (images.length + 1) * window.innerHeight,
+    invalidateOnRefresh: true,
+  });
 };
-const images = ref([mobile1, mobile2, mobile3, mobile4]);
+
+const projects = ref([
+  {
+    name: "Grand community",
+    role: "Frontend Developer",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, eaque?",
+    imgs: [mobile1, mobile2, mobile3, mobile4],
+  },
+  {
+    name: "Grand community",
+    role: "Frontend Developer",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, eaque?",
+    imgs: [mobile4, mobile1, mobile3, mobile2],
+  },
+]);
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
   initAnimation();
@@ -86,31 +145,32 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .projects-imgs {
+  position: relative;
   img {
     position: absolute;
     object-fit: contain;
     transition: transform 0.2s ease-out 0s;
     &:nth-child(1) {
-      bottom: -75vh;
+      //bottom: -75vh;
       left: 2vw;
       position: absolute;
       height: 80vh;
       filter: blur(0.8px);
     }
     &:nth-child(2) {
-      bottom: -55vh;
+      //bottom: -55vh;
       right: 5vw;
       height: 80vh;
       filter: blur(1.2px);
     }
     &:nth-child(3) {
-      bottom: -45vh;
+      //bottom: -45vh;
       right: 2vw;
       height: 80vh;
       filter: blur(0.6px);
     }
     &:nth-child(4) {
-      bottom: -90vh;
+      //bottom: -90vh;
       left: 0vw;
       height: 80vh;
     }
