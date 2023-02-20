@@ -27,7 +27,7 @@
           <div
             v-for="(project, index) in projects"
             :key="`p-imgs${index}`"
-            class="img-container absolute w-full h-full overflow-hidden"
+            class="_img-container absolute w-full h-full overflow-hidden"
             :class="{ last: projects.length - 1 == index }"
           >
             <img
@@ -36,6 +36,7 @@
               :src="item"
               alt="my projects"
               :data-delay="0.01 * index"
+              :style="imgsStyled(index)"
             />
           </div>
         </div>
@@ -63,12 +64,12 @@ const initAnimation = () => {
   //   damping: 0.1,
   //   delegateTo: document,
   // });
-  gsap.set(pImgs.querySelectorAll(".img-container"), {
+  gsap.set(pImgs.querySelectorAll("._img-container"), {
     zIndex: (i, target, targets) => targets.length - i,
   });
 
   let images = gsap.utils.toArray(
-    pImgs.querySelectorAll(".img-container:not(.last)")
+    pImgs.querySelectorAll("._img-container:not(.last)")
   );
 
   images.forEach((image, i) => {
@@ -83,7 +84,7 @@ const initAnimation = () => {
       },
     });
 
-    tl.to(image, { height: 0 });
+    tl.to(image, { height: '0%' });
   });
 
   //- text aniamtion
@@ -104,11 +105,13 @@ const initAnimation = () => {
       },
     });
     if (textArray.length - 1 !== i) {
-      tl.addLabel(`text${i}`)
-        .to(text, { duration: 0.33, opacity: 1, y: "0%" })
-        .to(text, { duration: 0.33, opacity: 0, y: "0%" }, 0.66);
+      tl.to(text, { duration: 0.33, opacity: 1, y: "0%" }).to(
+        text,
+        { duration: 0.33, opacity: 0, y: "0%" },
+        0.66
+      );
     } else {
-      tl.addLabel(`text${i}`).to(text, { duration: 0.33, opacity: 1, y: "0%" });
+      tl.to(text, { duration: 0.33, opacity: 1, y: "0%" });
     }
   });
   ScrollTrigger.create({
@@ -116,7 +119,6 @@ const initAnimation = () => {
     scrub: true,
     markers: true,
     pin: true,
-    snap: "labelsDirectional",
     start: () => "top top",
     end: () => "+=" + (images.length + 1) * window.innerHeight,
     invalidateOnRefresh: true,
@@ -149,6 +151,31 @@ const projects = ref([
     imgs: [mobile4, mobile1, mobile3, mobile2],
   },
 ]);
+const imgsStyled = (i) => {
+  const defObj = { height: "80vh", transform: "scale(0.7)" };
+  if (i == 0) {
+    const style = Object.assign({ left: "2vw", filter: "blur(0.8px)" }, defObj);
+    return style;
+  }
+  if (i == 1) {
+    const style = Object.assign(
+      { right: "5vw", filter: "blur(1.2px)" },
+      defObj
+    );
+    return style;
+  }
+  if (i == 2) {
+    const style = Object.assign(
+      { right: "2vw", filter: "blur(0.6px)" },
+      defObj
+    );
+    return style;
+  }
+  if (i == 3) {
+    const style = Object.assign({ left: "0vw" }, defObj);
+    return style;
+  }
+};
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
   initAnimation();
@@ -162,30 +189,6 @@ onMounted(() => {
     position: absolute;
     object-fit: contain;
     transition: transform 0.2s ease-out 0s;
-    &:nth-child(1) {
-      //bottom: -75vh;
-      left: 2vw;
-      position: absolute;
-      height: 80vh;
-      filter: blur(0.8px);
-    }
-    &:nth-child(2) {
-      //bottom: -55vh;
-      right: 5vw;
-      height: 80vh;
-      filter: blur(1.2px);
-    }
-    &:nth-child(3) {
-      //bottom: -45vh;
-      right: 2vw;
-      height: 80vh;
-      filter: blur(0.6px);
-    }
-    &:nth-child(4) {
-      //bottom: -90vh;
-      left: 0vw;
-      height: 80vh;
-    }
   }
 }
 </style>
