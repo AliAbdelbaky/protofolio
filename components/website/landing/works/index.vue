@@ -44,7 +44,7 @@ import mobile4 from "~~/assets/images/hompage/work/mobile_4.png";
 import { onMounted, ref } from "vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+
 const myWork = ref(null);
 const initAnimation = () => {
   const section = myWork.value.querySelector(".wrapper");
@@ -79,6 +79,7 @@ const initAnimation = () => {
 };
 const images = ref([mobile1, mobile2, mobile3, mobile4]);
 onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger);
   initAnimation();
 });
 </script>
