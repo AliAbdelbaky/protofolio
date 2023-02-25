@@ -1,7 +1,7 @@
 <template>
   <v-toolbar
     density="comfortable"
-    class="bg-transparent pt-8 px-7 pb-4 !sticky w-full top-0 z-40"
+    class="bg-transparent pt-8 px-7 pb-4 !fixed w-full top-0 z-40"
     style="transition: all 0.1s ease-in-out"
     :class="{ '--scroll': scrollPosition > 50 }"
   >

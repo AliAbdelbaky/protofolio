@@ -1,46 +1,50 @@
 <template>
-  <section class="mywork mt-4" ref="myWork">
+  <section class="work" ref="wrapperRef">
     <v-container fluid>
-      <MainTitle title="My Projects" subtitle="Selected Projects" />
-      <div class="wrapper flex gap-1 mt-8 h-screen">
-        <div class="projects-info flex-1 relative overflow-hidden h-[80vh]">
-          <div
-            v-for="(item, index) in projects"
-            :key="`p-info${index}`"
-            class="text-container absolute top-0 w-full h-full translate-y-[100%]"
-            :class="{ last: projects.length - 1 == index }"
-          >
-            <div class="sort py-8 px-4 font-bold">{{ `0${index + 1}` }}</div>
+
+      <div
+        v-for="(item, index) in projects"
+        :key="`p-info${index}`"
+        class="flex items-center warpper"
+      >
+        <div class="desc flex-1">
+          <div class="info-wrapper h-screen opacity-0">
             <div
-              class="info flex flex-col flex-nowrap"
-              style="padding: 5% 5% 5% 10%"
+              class="text-container w-full h-full"
+              :class="{ last: projects.length - 1 == index }"
             >
-              <h2 class="text-7xl font-semibold mb-5">{{ item.name }}</h2>
-              <h5 class="text-5xl mb-5">{{ item.role }}</h5>
-              <p class="text-2xl">
-                {{ item.desc }}
-              </p>
+              <div class="sort py-2 px-4 font-bold">{{ `0${index + 1}` }}</div>
+              <div
+                class="info flex flex-col flex-nowrap"
+                style="padding: 5% 5% 5% 10%"
+              >
+                <h2 class="text-7xl font-semibold mb-5">{{ item.name }}</h2>
+                <h5 class="text-5xl mb-5">{{ item.role }}</h5>
+                <p class="text-2xl">
+                  {{ item.desc }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="projects-imgs flex-1 relative overflow-hidden h-[80vh]">
-          <div
-            v-for="(project, index) in projects"
-            :key="`p-imgs${index}`"
-            class="_img-container absolute w-full h-full overflow-hidden"
-            :class="{ last: projects.length - 1 == index }"
-          >
-            <img
-              v-for="(item, index) in project.imgs"
-              :key="index"
-              :src="item"
-              alt="my projects"
-              :data-delay="0.01 * index"
-              :style="imgsStyled(index)"
-            />
+        <div class="pics flex-1">
+          <div class="imgs-wrapper h-screen relative w-full">
+            <div
+              v-for="(_item, _index) in item.imgs"
+              :key="_index"
+              class="_img-container absolute max-w-xs max-h-80"
+            >
+              <img
+                :src="_item"
+                class="w-full h-full object-contain max-h-80"
+                alt=""
+                :data-scrub="0.5 * _index"
+              />
+            </div>
           </div>
         </div>
       </div>
+
     </v-container>
   </section>
 </template>
@@ -55,73 +59,34 @@ import { onMounted, ref } from "vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-const myWork = ref(null);
+const wrapperRef = ref(null);
 const initAnimation = () => {
-  const section = myWork.value.querySelector(".wrapper");
-  const pInfo = section.querySelector(".projects-info");
-  const pImgs = section.querySelector(".projects-imgs");
-  // let bodyScrollBar = Scrollbar.init(document.body, {
-  //   damping: 0.1,
-  //   delegateTo: document,
-  // });
-  gsap.set(pImgs.querySelectorAll("._img-container"), {
-    zIndex: (i, target, targets) => targets.length - i,
-  });
-
-  let images = gsap.utils.toArray(
-    pImgs.querySelectorAll("._img-container:not(.last)")
-  );
-
-  images.forEach((image, i) => {
-    var tl = gsap.timeline({
+  const wrappers = wrapperRef.value.querySelectorAll(".warpper");
+  const wrapperArray = gsap.utils.toArray(wrappers);
+  wrapperArray.forEach((wrapper, $wIndex) => {
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: section,
-        start: () => "top -" + window.innerHeight * (i + 0.5),
-        end: () => "+=" + window.innerHeight,
-        scrub: true,
+        trigger: wrapper,
+        scrub: 1,
         toggleActions: "play none reverse none",
-        invalidateOnRefresh: true,
+        toggleClass: "active",
       },
     });
+    const imgList = gsap.utils.toArray(
+      wrapper.querySelectorAll(".pics .imgs-wrapper ._img-container")
+    );
 
-    tl.to(image, { height: '0%' });
-  });
-
-  //- text aniamtion
-  gsap.set(pInfo.querySelectorAll(".text-container"), {
-    zIndex: (i, target, targets) => targets.length - i,
-  });
-  let textArray = gsap.utils.toArray(pInfo.querySelectorAll(".text-container"));
-
-  textArray.forEach((text, i) => {
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: () => "top -" + window.innerHeight * i,
-        end: () => "+=" + window.innerHeight,
-        scrub: true,
-        toggleActions: "play none reverse none",
-        invalidateOnRefresh: true,
-      },
-    });
-    if (textArray.length - 1 !== i) {
-      tl.to(text, { duration: 0.33, opacity: 1, y: "0%" }).to(
-        text,
-        { duration: 0.33, opacity: 0, y: "0%" },
-        0.66
+    imgList.forEach((img, $imgIndex) => {
+      tl.to(
+        img,
+        {
+          ease: "power3",
+          duration: 3,
+          y: "-100%",
+        },
+        `+= ${parseFloat(img.dataset.scrub) || 0.1}`
       );
-    } else {
-      tl.to(text, { duration: 0.33, opacity: 1, y: "0%" });
-    }
-  });
-  ScrollTrigger.create({
-    trigger: section,
-    scrub: true,
-    markers: true,
-    pin: true,
-    start: () => "top top",
-    end: () => "+=" + (images.length + 1) * window.innerHeight,
-    invalidateOnRefresh: true,
+    });
   });
 };
 
@@ -151,44 +116,54 @@ const projects = ref([
     imgs: [mobile4, mobile1, mobile3, mobile2],
   },
 ]);
-const imgsStyled = (i) => {
-  const defObj = { height: "80vh", transform: "scale(0.7)" };
-  if (i == 0) {
-    const style = Object.assign({ left: "2vw", filter: "blur(0.8px)" }, defObj);
-    return style;
-  }
-  if (i == 1) {
-    const style = Object.assign(
-      { right: "5vw", filter: "blur(1.2px)" },
-      defObj
-    );
-    return style;
-  }
-  if (i == 2) {
-    const style = Object.assign(
-      { right: "2vw", filter: "blur(0.6px)" },
-      defObj
-    );
-    return style;
-  }
-  if (i == 3) {
-    const style = Object.assign({ left: "0vw" }, defObj);
-    return style;
-  }
-};
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
   initAnimation();
 });
 </script>
 
-<style lang="scss" scoped>
-.projects-imgs {
-  position: relative;
-  img {
-    position: absolute;
-    object-fit: contain;
-    transition: transform 0.2s ease-out 0s;
+<style scoped lang="scss">
+.warpper {
+  .info-wrapper {
+    transition: all 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateY(-20px);
+  }
+  &.active {
+    .info-wrapper {
+      opacity: 1 !important;
+      transform: translateY(0px);
+    }
+  }
+}
+.imgs-wrapper {
+  ._img-container {
+    &:nth-child(1) {
+      top: 20vh;
+      left: 1vw;
+      z-index: 2;
+      filter: blur(0.5px) drop-shadow(2px 4px 6px black);
+    }
+    &:nth-child(2) {
+      bottom: -20vh;
+      left: 8vw;
+      height: 70vh;
+      transform: scale(1.2);
+      filter: drop-shadow(2px 4px 6px black);
+      z-index: 2;
+    }
+    &:nth-child(3) {
+      z-index: 2;
+      top: 10vh;
+      right: 1vw;
+      transform: scale(1.5);
+      filter: drop-shadow(2px 4px 6px black);
+    }
+    &:nth-child(4) {
+      bottom: -30vh;
+      right: 2vw;
+      filter: blur(0.6px) drop-shadow(2px 4px 6px black);
+      transform: scale(0.9);
+    }
   }
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
   <website-landing-hero />
-  <website-landing-works/>
+  <website-landing-works />
 </template>
 
-<script setup lang="ts">
+<script setup>
 definePageMeta({
   layout: "default",
 });
 </script>
-
-<style scoped></style>

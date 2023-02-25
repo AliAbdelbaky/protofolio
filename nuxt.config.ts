@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   app: {
     head: {
-      titleTemplate: "%s - Grand Community",
+      titleTemplate: "%s - Portfolio",
       title: "Grand",
       meta: [
         {
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
         {
           rel: "icon",
           type: "image/x-icon",
-          href: "/favicon.png",
+          href: "/logo.svg",
         },
       ],
     },
