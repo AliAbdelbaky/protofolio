@@ -25,6 +25,7 @@ module.exports = {
         },
         bg: {
           DEFAULT: 'var(--bg)',
+          primary:'var(--primary)'
         },
         border: {
           DEFAULT: 'var(--primary)',
