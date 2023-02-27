@@ -27,14 +27,14 @@
       >
         <a
           href="#projects "
-          class="text-primary font-semibold capitalize text-[1.12rem] relative"
+          class="main_hoveralble pb-2 text-primary font-semibold capitalize text-[1.12rem] relative"
         >
           View projects</a
         >
         <span> or </span>
         <nuxt-link
           to="/about"
-          class="text-primary font-semibold capitalize text-[1.12rem] relative"
+          class="main_hoveralble pb-2 text-primary font-semibold capitalize text-[1.12rem] relative"
           >Read About Me</nuxt-link
         >
       </div>

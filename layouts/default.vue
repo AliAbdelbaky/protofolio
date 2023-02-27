@@ -6,6 +6,7 @@
         <slot />
       </v-container>
     </v-main>
+    <Footer/>
   </v-app>
   <div class="ball"></div>
 </template>
@@ -14,6 +15,7 @@
 import gsap from "gsap";
 
 import Toolbar from "~~/components/website/shared/Toolbar.vue";
+import Footer from "~~/components/website/shared/Footer.vue";
 useHead({
   title: "Ali Abdelbaqy",
 });
