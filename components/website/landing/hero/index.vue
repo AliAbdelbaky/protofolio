@@ -26,7 +26,7 @@
         class="w-fit gap-3 flex text-secondary flex-wrap justify-between mt-5 mx-auto"
       >
         <a
-          href="#projects "
+          @click="scrollTo"
           class="main_hoveralble pb-2 text-primary font-semibold capitalize text-[1.12rem] relative"
         >
           View projects</a
@@ -44,6 +44,9 @@
 
 <script setup>
 import heroImg from "~~/assets/images/header.png";
+const scrollTo = () => {
+  window.scrollTo(0, 400);
+};
 </script>
 
 <style lang="scss">
