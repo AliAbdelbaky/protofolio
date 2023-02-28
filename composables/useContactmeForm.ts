@@ -17,6 +17,7 @@ export default function () {
     items: { required },
     checkbox: { required },
   };
+  // @ts-ignore
   const v$ = useVuelidate(rules, state);
 
   return { state, v$, serveices, budgets };
