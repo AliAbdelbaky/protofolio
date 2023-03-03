@@ -50,11 +50,10 @@
 </template>
 
 <script setup>
-import MainTitle from "../../shared/MainTitle.vue";
-import mobile1 from "~~/assets/images/hompage/work/mobile_1.png";
-import mobile2 from "~~/assets/images/hompage/work/mobile_2.png";
-import mobile3 from "~~/assets/images/hompage/work/mobile_3.png";
-import mobile4 from "~~/assets/images/hompage/work/mobile_4.png";
+import mobile1 from "~~/assets/imgs/hompage/work/mobile_1.png";
+import mobile2 from "~~/assets/imgs/hompage/work/mobile_2.png";
+import mobile3 from "~~/assets/imgs/hompage/work/mobile_3.png";
+import mobile4 from "~~/assets/imgs/hompage/work/mobile_4.png";
 import { onMounted, ref } from "vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";

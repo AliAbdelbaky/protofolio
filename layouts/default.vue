@@ -11,21 +11,21 @@
   <DefaultActions />
 </template>
 
-<script setup>
+<script setup lang="ts">
+// @ts-ignore
 import Toolbar from "~~/components/website/shared/Toolbar.vue";
+// @ts-ignore
 import Footer from "~~/components/website/shared/Footer.vue";
+// @ts-ignore
 import DefaultActions from "~~/components/website/shared/DefaultActions.vue";
-useHead({
-  title: "Ali Abdelbaqy",
-});
-const { setTheme } = useThemeHandller();
-const { setlang } = useLangHandller();
+import useLangHandler from "~/composables/layout/useLangHandler";
+
+const { locale, setlang } = useLangHandler();
+
 onMounted(() => {
-  if (localStorage) {
-    const theme = localStorage.getItem("theme");
-    const lang = localStorage.getItem("lang");
-    setTheme(theme ? theme : "light");
-    setlang(lang ? lang : "en");
+  if (process.client) {
+    const lang = localStorage.getItem("lang") || "en";
+    setlang(lang);
   }
 });
 </script>

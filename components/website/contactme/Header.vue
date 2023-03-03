@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import Africaimg from "~~/assets/images/contactme/africa.svg";
+import Africaimg from "~~/assets/imgs/contactme/africa.svg";
 const slogan = "letsworktogether".split("");
 </script>
 

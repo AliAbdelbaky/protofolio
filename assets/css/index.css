@@ -1,5 +1,5 @@
-@import './style/base.css';
-@import './style/taillwind.css';
+@import './modules/taillwind.css';
+@import './modules/base.css';
 
 .main_hoveralble {
   position: relative;

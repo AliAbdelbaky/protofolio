@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
+  // prefix: 'tw-',
   content: [
     "./components/**/*.{js,vue,ts}",
     "./layouts/**/*.vue",
@@ -17,6 +18,9 @@ module.exports = {
         secondary: {
           DEFAULT: 'var(--secondary)',
         },
+        third: {
+          DEFAULT: 'var(--third)',
+        },
         accent: {
           DEFAULT: 'var(--accent)',
         },
@@ -25,12 +29,11 @@ module.exports = {
         },
         bg: {
           DEFAULT: 'var(--bg)',
-          primary:'var(--primary)'
+          primary: 'var(--primary)',
         },
         border: {
           DEFAULT: 'var(--primary)',
-        }
-
+        },
       },
     },
     container: {
@@ -45,5 +48,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-rtl')],
+  // plugins: [require('tailwindcss-rtl')],
 }
