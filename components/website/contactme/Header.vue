@@ -15,7 +15,6 @@
       </div>
     </div>
   </section>
-  <Three/>
 </template>
 
 <script setup>
@@ -92,7 +91,7 @@ const slogan = "letsworktogether".split("");
   width: 100%;
   overflow: hidden;
   position: relative;
-  img{
+  img {
     transform: translate(-8vw, 10px);
     filter: blur(0.6px);
   }
@@ -142,5 +141,5 @@ const slogan = "letsworktogether".split("");
     transform: scale(1);
     opacity: 0;
   }
-};
+} ;
 </style>
