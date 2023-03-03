@@ -3,18 +3,23 @@
 </template>
 
 <script setup>
-import WorldImg from "~~/assets/imgs/contactme/world.jpg";
+import WorldImg from "~~/assets/imgs/contactme/globe.png";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
-
+let img;
 const threeref = ref(null);
 const initAniamtion = () => {
   //-- scene
   const scene = new THREE.Scene();
   //-- create glob
+  const worldTexture = new THREE.TextureLoader().load(WorldImg);
   const geometry = new THREE.SphereGeometry(3, 64, 64);
-  const material = new THREE.MeshStandardMaterial({ color: "#00ff83" });
+  const material = new THREE.MeshBasicMaterial({
+    // color: "#ffffff",
+    map: worldTexture,
+    transprent: true,
+  });
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
@@ -33,9 +38,10 @@ const initAniamtion = () => {
   );
   camera.position.z = 9;
   scene.add(camera);
+
   //- light
-  const light = new THREE.PointLight(0xffff, 1, 100);
-  light.position.set(0, 10, 10);
+  const light = new THREE.PointLight("0xffff", 1, 100);
+  light.position.set(1, 20, 20);
   scene.add(light);
 
   //- Rendere
@@ -44,12 +50,16 @@ const initAniamtion = () => {
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(2);
   renderer.render(scene, camera);
+  renderer.setClearColor(0xffff);
+
   //-- controls
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.enableZoom = false;
   controls.enablePan = false;
   controls.enableRotate = false;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed *= 0.25;
   //- resize listiner
   const resizeListiner = () => {
     window.addEventListener("resize", () => {
