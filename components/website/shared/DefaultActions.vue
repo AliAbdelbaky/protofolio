@@ -6,7 +6,7 @@
   >
     <nuxt-link
       to="/contactme"
-      class="btn email cursor-pointer bg-[var(--primary)] w-[46px] h-[46px] p-[13px] rounded-full opacity-0 transition-all -translate-y-4"
+      class="btn email  cursor-pointer bg-[var(--primary)] w-[46px] h-[46px] p-[13px] rounded-full opacity-0 transition-all -translate-y-4"
     >
       <svg
         class="float-left"
@@ -91,6 +91,15 @@ onMounted(() => {
   border-radius: 50%;
   pointer-events: none;
   z-index: 999;
+}
+.btn{
+  &.email{
+    opacity: 0.8 !important;
+    transform: translateY(0px) !important;
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
 }
 .--scroll {
   .btn {
