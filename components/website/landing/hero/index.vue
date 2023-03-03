@@ -43,7 +43,6 @@
 </template>
 
 <script setup>
-import heroImg from "~~/assets/images/header.png";
 const scrollTo = () => {
   window.scrollTo(0, 400);
 };
