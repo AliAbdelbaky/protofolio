@@ -15,10 +15,13 @@
       </div>
     </div>
   </section>
+  <Three/>
 </template>
 
 <script setup>
 import Africaimg from "~~/assets/imgs/contactme/africa.svg";
+
+import Three from "./Three.vue";
 const slogan = "letsworktogether".split("");
 </script>
 

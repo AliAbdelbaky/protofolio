@@ -2,9 +2,7 @@
   <v-app>
     <Toolbar />
     <v-main class="min-h-screen">
-      <v-container fluid>
         <slot />
-      </v-container>
     </v-main>
     <Footer />
   </v-app>
