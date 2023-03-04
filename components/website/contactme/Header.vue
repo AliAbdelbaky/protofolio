@@ -33,6 +33,7 @@ const slogan = "letsworktogether".split("");
     height: 100%;
     background: #000010;
     background: linear-gradient(0deg, #fff 2%, rgba(0, 0, 0, 0) 31%);
+    pointer-events: none;
   }
 }
 .text-container {
@@ -43,6 +44,7 @@ const slogan = "letsworktogether".split("");
   width: 664px;
   height: 630px;
   z-index: 22;
+  pointer-events: none;
   i {
     position: relative;
     float: left;
@@ -90,30 +92,6 @@ const slogan = "letsworktogether".split("");
   img {
     transform: translate(-8vw, 10px);
     filter: blur(0.6px);
-  }
-  &::after,
-  &::before {
-    position: absolute;
-    content: "";
-    top: 9rem;
-    right: 34rem;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-  }
-  &::after {
-    animation-name: fade;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-fill-mode: backwards;
-  }
-  &::before {
-    animation-name: fade-two;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    transform: scale(0.4);
-    z-index: 30;
   }
 }
 @keyframes fade {

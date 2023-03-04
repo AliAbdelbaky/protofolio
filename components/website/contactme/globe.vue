@@ -38,7 +38,7 @@ const initAniamtion = () => {
     z = z - dz;
     long = long + dlong;
 
-    c.setHSL(0, 0% 100% 1);
+    c.setHSL(0, 0, Math.random() * 0.55 + 0.25);
     c.toArray(clr, i * 3);
 
     sph.setFromVector3(p);
@@ -47,7 +47,6 @@ const initAniamtion = () => {
   let g = new THREE.BufferGeometry().setFromPoints(pts);
   g.setAttribute("color", new THREE.Float32BufferAttribute(clr, 3));
   g.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
-  console.log(new THREE.Float32BufferAttribute(clr, 3))
   let m = new THREE.PointsMaterial({
     size: 0.1,
     vertexColors: true,
@@ -202,7 +201,7 @@ const initAniamtion = () => {
   const canvas = threeref.value;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setSize(sizes.width, sizes.height);
-  // renderer.setPixelRatio(2);
+  renderer.setPixelRatio(2);
   renderer.render(scene, camera);
   renderer.setClearColor(0xF1FFF1);
 
@@ -232,8 +231,8 @@ const initAniamtion = () => {
     loop();
   };
   resizeListiner();
-  // const tl = gsap.timeline({ defaults: { duration: 1 } });
-  // tl.fromTo(markers, { scale: 0 }, { scale: 1 });
+  const tl = gsap.timeline({ defaults: { duration: 1 } });
+  tl.fromTo(globe.scale, { scale: 0 }, { scale: 1 });
 };
 onMounted(() => {
   initAniamtion();
