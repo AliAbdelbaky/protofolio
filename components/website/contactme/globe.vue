@@ -145,19 +145,18 @@ const initAniamtion = () => {
   let dummy = new THREE.Object3D();
   let phase = [];
   for (let i = 0; i < markerCount; i++) {
-    const egy= {
+    const egy = {
       x: 2.2,
       y: 2.5086124216168033,
       z: 4.39896273566048,
     };
-    dummy.position.x = egy.x
-    dummy.position.y = egy.y
-    dummy.position.z = egy.z
+    dummy.position.x = egy.x;
+    dummy.position.y = egy.y;
+    dummy.position.z = egy.z;
     dummy.lookAt(dummy.position.clone().setLength(rad + 1));
     dummy.updateMatrix();
     markers.setMatrixAt(i, dummy.matrix);
     phase.push(Math.random());
-    
   }
   gMarker.setAttribute(
     "phase",
@@ -203,7 +202,7 @@ const initAniamtion = () => {
   renderer.setSize(sizes.width, sizes.height);
   renderer.setPixelRatio(2);
   renderer.render(scene, camera);
-  renderer.setClearColor(0xF1FFF1);
+  renderer.setClearColor(0xf1fff1);
 
   //-- controls
   const controls = new OrbitControls(camera, canvas);
@@ -232,7 +231,7 @@ const initAniamtion = () => {
   };
   resizeListiner();
   const tl = gsap.timeline({ defaults: { duration: 1 } });
-  tl.fromTo(globe.scale, { scale: 0 }, { scale: 1 });
+  tl.fromTo(globe.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
 };
 onMounted(() => {
   initAniamtion();

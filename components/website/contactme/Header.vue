@@ -1,7 +1,7 @@
 <template>
   <section class="header">
     <div class="map-container relative h-screen flex">
-      <div class="text-container">
+      <div class="text-container" ref="textRef">
         <i v-for="(item, index) in slogan" :key="index">
           {{ item }}
         </i>
@@ -14,10 +14,18 @@
 </template>
 
 <script setup>
-import Africaimg from "~~/assets/imgs/contactme/africa.svg";
 import GlobeVue from "./globe.vue";
-import Three from "./globe.vue";
+import gsap from "gsap";
 const slogan = "letsworktogether".split("");
+const textRef = ref(null);
+onMounted(() => {
+  const tl = gsap.timeline({ defaults: { duration: 0.2 } });
+  const textArr = gsap.utils.toArray(textRef.value.querySelectorAll("i"));
+
+  textArr.forEach((el) => {
+    tl.fromTo(el, { opacity: 0, y: 19 }, { opacity: 1, y: 0 });
+  });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -85,35 +93,4 @@ const slogan = "letsworktogether".split("");
     }
   }
 }
-.img-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  img {
-    transform: translate(-8vw, 10px);
-    filter: blur(0.6px);
-  }
-}
-@keyframes fade {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 0;
-  }
-}
-@keyframes fade-two {
-  0%,
-  100% {
-    transform: scale(0.5);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1);
-    opacity: 0;
-  }
-} ;
 </style>

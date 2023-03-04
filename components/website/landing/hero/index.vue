@@ -48,7 +48,7 @@ const scrollTo = () => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hero {
   position: relative;
   .hero_text {
@@ -63,26 +63,6 @@ const scrollTo = () => {
     z-index: 0;
     filter: drop-shadow(18px 18px 16px #f7f7f7);
     pointer-events: none;
-  }
-}
-.img-container {
-  position: relative;
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    // z-index: 2
-    background: #000010;
-    background: linear-gradient(0deg, #fff 1%, rgba(0, 0, 0, 0) 40%);
-  }
-  .v-img__img {
-    filter: grayscale(1) drop-shadow(6px 18px 49px #f7f7f7);
   }
 }
 </style>
