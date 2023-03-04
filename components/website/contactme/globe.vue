@@ -7,7 +7,6 @@ import WorldImg from "~~/assets/imgs/contactme/globe.png";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
-let img;
 const threeref = ref(null);
 const initAniamtion = () => {
   //-- scene
@@ -39,7 +38,7 @@ const initAniamtion = () => {
     z = z - dz;
     long = long + dlong;
 
-    c.setHSL(0.45, 0.5, Math.random() * 0.25 + 0.25);
+    c.setHSL(0, 0% 100% 1);
     c.toArray(clr, i * 3);
 
     sph.setFromVector3(p);
@@ -48,6 +47,7 @@ const initAniamtion = () => {
   let g = new THREE.BufferGeometry().setFromPoints(pts);
   g.setAttribute("color", new THREE.Float32BufferAttribute(clr, 3));
   g.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
+  console.log(new THREE.Float32BufferAttribute(clr, 3))
   let m = new THREE.PointsMaterial({
     size: 0.1,
     vertexColors: true,
@@ -83,9 +83,9 @@ const initAniamtion = () => {
       	bool circ = length(gl_PointCoord - 0.5) > 0.5; // make points round
         bool vis = dot(vMvPosition, vNormal) < 0.; // visible only on the front side of the sphere
       	if (circ || vis) discard;
-        
+
         vec3 col = diffuse + (vVisibility > 0.5 ? 0.5 : 0.); // make oceans brighter
-        
+
         vec4 diffuseColor = vec4( col, opacity );
       `
       );
@@ -96,15 +96,15 @@ const initAniamtion = () => {
   scene.add(globe);
   let icshdrn = new THREE.Mesh(
     new THREE.IcosahedronGeometry(rad, 1),
-    new THREE.MeshBasicMaterial({ color: 0x647f7f, wireframe: true })
+    new THREE.MeshBasicMaterial({ color: 0xcfd0d2, wireframe: true })
   );
   globe.add(icshdrn);
   // <Markers>
-  const markerCount = 30;
+  const markerCount = 1;
   let markerInfo = []; // information on markers
   let gMarker = new THREE.PlaneGeometry();
   let mMarker = new THREE.MeshBasicMaterial({
-    color: 0xff3232,
+    color: 0xffffff,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = new Date().getTime();
       shader.vertexShader = `
@@ -130,12 +130,12 @@ const initAniamtion = () => {
       float lenUv = length(lUv);
       val = max(val, 1. - step(0.25, lenUv)); // central circle
       val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
-      
+
       float tShift = fract(time * 0.5 + vPhase);
       val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
-      
+
       if (val < 0.5) discard;
-      
+
       vec4 diffuseColor = vec4( diffuse, opacity );`
       );
       //console.log(shader.fragmentShader)
@@ -146,17 +146,19 @@ const initAniamtion = () => {
   let dummy = new THREE.Object3D();
   let phase = [];
   for (let i = 0; i < markerCount; i++) {
-    dummy.position.randomDirection().setLength(rad + 0.1);
+    const egy= {
+      x: 2.2,
+      y: 2.5086124216168033,
+      z: 4.39896273566048,
+    };
+    dummy.position.x = egy.x
+    dummy.position.y = egy.y
+    dummy.position.z = egy.z
     dummy.lookAt(dummy.position.clone().setLength(rad + 1));
     dummy.updateMatrix();
     markers.setMatrixAt(i, dummy.matrix);
     phase.push(Math.random());
-
-    markerInfo.push({
-      id: i + 1,
-      mag: THREE.MathUtils.randInt(1, 10),
-      crd: dummy.position.clone(),
-    });
+    
   }
   gMarker.setAttribute(
     "phase",
@@ -192,7 +194,7 @@ const initAniamtion = () => {
   scene.add(camera);
 
   //- light
-  const light = new THREE.PointLight("0xffff", 1, 100);
+  const light = new THREE.PointLight("0xF1FFF1", 1, 100);
   light.position.set(1, 20, 20);
   scene.add(light);
 
@@ -202,12 +204,12 @@ const initAniamtion = () => {
   renderer.setSize(sizes.width, sizes.height);
   // renderer.setPixelRatio(2);
   renderer.render(scene, camera);
-  renderer.setClearColor(0xffff);
+  renderer.setClearColor(0xF1FFF1);
 
   //-- controls
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
-  controls.enableZoom = true;
+  controls.enableZoom = false;
   controls.enablePan = false;
   controls.enableRotate = true;
   controls.autoRotate = true;
@@ -231,11 +233,9 @@ const initAniamtion = () => {
   };
   resizeListiner();
   // const tl = gsap.timeline({ defaults: { duration: 1 } });
-  // tl.fromTo(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
+  // tl.fromTo(markers, { scale: 0 }, { scale: 1 });
 };
 onMounted(() => {
   initAniamtion();
 });
 </script>
-
-<style scoped></style>

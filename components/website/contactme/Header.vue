@@ -7,11 +7,7 @@
         </i>
       </div>
       <div class="img-container w-full overflow-hidden relative">
-        <img
-          :src="Africaimg"
-          alt=" contact me header ali abdelbaqy location"
-          class="w-full object-cover"
-        />
+        <GlobeVue />
       </div>
     </div>
   </section>
@@ -19,8 +15,8 @@
 
 <script setup>
 import Africaimg from "~~/assets/imgs/contactme/africa.svg";
-
-import Three from "./Three.vue";
+import GlobeVue from "./globe.vue";
+import Three from "./globe.vue";
 const slogan = "letsworktogether".split("");
 </script>
 
