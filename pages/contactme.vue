@@ -1,11 +1,12 @@
 <template>
-  <Header />
-  <Forms />
+  <MainComp />
 </template>
 
 <script setup>
-import Header from "~~/components/website/contactme/Header.vue";
-import Forms from "~~/components/website/contactme/Form.vue";
+import MainComp from "~~/components/website/contactme/index.vue";
+definePageMeta({
+  layout: "default",
+});
 </script>
 
 <style lang="scss" scoped></style>

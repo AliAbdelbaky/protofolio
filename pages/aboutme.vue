@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import MainComp from "~~/components/website/landing/index.vue";
+import MainComp from "~~/components/website/aboutme/index.vue";
 definePageMeta({
   layout: "default",
 });

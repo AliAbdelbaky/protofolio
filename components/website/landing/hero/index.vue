@@ -33,7 +33,7 @@
         >
         <span> or </span>
         <nuxt-link
-          to="/about"
+          to="/aboutme"
           class="main_hoveralble pb-2 text-primary font-semibold capitalize text-[1.12rem] relative"
           >Read About Me</nuxt-link
         >
