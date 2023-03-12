@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12" md="4">
-          <div class=" flex flex-col items-start justify-center">
+          <div class="flex flex-col items-start justify-center">
             <h5
               class="text-secondary tracking-[0.4em] ms-2 font-semibold uppercase text-[0.8rem]"
             >
@@ -56,43 +56,46 @@
                   </v-col>
                   <v-col cols="12" md="6">
                     <v-select
-                      v-model="state.select"
+                      v-model="state.service"
                       :items="serveices"
-                      :error-messages="v$.select.$errors.map((e) => e.$message)"
+                      :error-messages="v$.service.$errors.map((e) => e.$message)"
                       label="Service"
                       required
-                      @change="v$.select.$touch"
-                      @blur="v$.select.$touch"
+                      @change="v$.service.$touch"
+                      @blur="v$.service.$touch"
                       density="compact"
                       variant="solo"
                     ></v-select>
                   </v-col>
                   <v-col cols="12" md="6">
                     <v-select
-                      v-model="state.select"
+                      v-model="state.budget"
                       :items="budgets"
-                      :error-messages="v$.select.$errors.map((e) => e.$message)"
+                      :error-messages="v$.budget.$errors.map((e) => e.$message)"
                       label="Budget"
                       required
-                      @change="v$.select.$touch"
-                      @blur="v$.select.$touch"
+                      @change="v$.budget.$touch"
+                      @blur="v$.budget.$touch"
                       variant="solo"
                       density="compact"
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12" md="12">
-                    <v-textarea
+                      ></v-select>
+                    </v-col>
+                    <v-col cols="12" md="12">
+                      <v-textarea
                       variant="solo"
                       density="compact"
                       label="Message"
-                      v-model="state.select"
+                      v-model="state.message"
+                      @change="v$.message.$touch"
+                      @blur="v$.message.$touch"
+                      :error-messages="v$.message.$errors.map((e) => e.$message)"
                     ></v-textarea>
                   </v-col>
                   <v-col cols="12">
                     <v-btn
                       class="me-4"
                       prepend-icon="mdi-email-fast-outline"
-                      @click="v$.$validate"
+                      @click="submit"
                     >
                       SEND MESSAGE
                     </v-btn>
@@ -108,7 +111,7 @@
 </template>
 <script setup>
 import useContactmeForm from "~~/composables/pages/useContactmeForm";
-const { state, v$, serveices, budgets } = useContactmeForm();
+const { state, v$, serveices, budgets, submit } = useContactmeForm();
 </script>
 
 <style lang="scss" scoped></style>
