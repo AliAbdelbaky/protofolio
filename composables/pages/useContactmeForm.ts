@@ -10,6 +10,10 @@ interface State {
 }
 export default function () {
   const loading = ref(false);
+  const snackbar = reactive({
+    value: false,
+    text: "",
+  });
   const state = reactive<State>({
     name: null,
     email: null,
@@ -39,9 +43,21 @@ export default function () {
       },
     },
   });
-  const submit = () => {
-    app.post("contactme", state);
+  const submit = async () => {
+    v$.value.$validate();
+    if (!v$.value.$invalid) {
+      loading.value = true;
+      try {
+        const { data } = await app.post("contactme", state);
+        snackbar.text = data?.msg;
+        console.log(data);
+        snackbar.value = true;
+        loading.value = false;
+      } catch (e) {
+        loading.value = false;
+      }
+    } else return;
   };
 
-  return { state, v$, serveices, budgets, submit };
+  return { state, v$, serveices, budgets, submit, snackbar, loading };
 }

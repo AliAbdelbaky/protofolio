@@ -58,7 +58,9 @@
                     <v-select
                       v-model="state.service"
                       :items="serveices"
-                      :error-messages="v$.service.$errors.map((e) => e.$message)"
+                      :error-messages="
+                        v$.service.$errors.map((e) => e.$message)
+                      "
                       label="Service"
                       required
                       @change="v$.service.$touch"
@@ -78,17 +80,19 @@
                       @blur="v$.budget.$touch"
                       variant="solo"
                       density="compact"
-                      ></v-select>
-                    </v-col>
-                    <v-col cols="12" md="12">
-                      <v-textarea
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12" md="12">
+                    <v-textarea
                       variant="solo"
                       density="compact"
                       label="Message"
                       v-model="state.message"
                       @change="v$.message.$touch"
                       @blur="v$.message.$touch"
-                      :error-messages="v$.message.$errors.map((e) => e.$message)"
+                      :error-messages="
+                        v$.message.$errors.map((e) => e.$message)
+                      "
                     ></v-textarea>
                   </v-col>
                   <v-col cols="12">
@@ -96,6 +100,8 @@
                       class="me-4"
                       prepend-icon="mdi-email-fast-outline"
                       @click="submit"
+                      :disabled="loading"
+                      :loading="loading"
                     >
                       SEND MESSAGE
                     </v-btn>
@@ -108,10 +114,13 @@
       </v-row>
     </v-container>
   </section>
+  <v-snackbar v-model="snackbar.value">
+    {{ snackbar.text }}
+  </v-snackbar>
 </template>
 <script setup>
 import useContactmeForm from "~~/composables/pages/useContactmeForm";
-const { state, v$, serveices, budgets, submit } = useContactmeForm();
+const { state, v$, serveices, budgets, submit, snackbar,loading } = useContactmeForm();
 </script>
 
 <style lang="scss" scoped></style>
