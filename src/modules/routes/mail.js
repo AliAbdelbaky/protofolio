@@ -17,10 +17,23 @@ router.post('/contactme', async (req, res) => {
         html: Mailer.HTmlTemplate(msg)
     }
     Mailer.init(options, (info) => { }).then(() => {
-        res.status(200).send({ msg: "Email sent successfully" })
+        forwardEmail().finally(() => {
+            res.status(200).send({ msg: "Email sent successfully" })
+        })
     }).catch(() => {
         useErrorHandler(res, 403, 'Access Denied')
     })
+    const forwardEmail = () => {
+        const options2 = {
+            from: `aliprotofolio@gmail.com`, // sender address
+            to: `${email}`, // receiver email
+            subject: "Email From website", // Subject line
+            text: `Dear ${name} hii`,
+            html: Mailer.HTmlTemplate(`Dear ${name} hii`)
+        }
+        return Mailer.init(options2, (info) => { })
+
+    }
 
 })
 
