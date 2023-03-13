@@ -117,7 +117,7 @@ const projects = ref([
 ]);
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
-  initAnimation();
+  requestAnimationFrame(initAnimation)
 });
 </script>
 

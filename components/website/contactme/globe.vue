@@ -209,7 +209,7 @@ const initAniamtion = () => {
   controls.enableDamping = true;
   controls.enableZoom = false;
   controls.enablePan = false;
-  controls.enableRotate = true;
+  controls.enableRotate = false;
   controls.autoRotate = true;
   controls.autoRotateSpeed *= 0.25;
   //- resize listiner
@@ -234,6 +234,6 @@ const initAniamtion = () => {
   tl.fromTo(globe.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
 };
 onMounted(() => {
-  initAniamtion();
+  requestAnimationFrame(initAniamtion);
 });
 </script>
