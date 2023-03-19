@@ -1,5 +1,5 @@
 <template>
-  <section class="hero h-screen relative">
+  <section class="hero py-[20%] relative">
     <h2 class="hero_text">developer.</h2>
     <div
       class="text_container flex flex-col text-center justify-center h-full w-full pb-4 ps-8 z-10 relative"
