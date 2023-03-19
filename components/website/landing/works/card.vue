@@ -59,7 +59,7 @@ const initAnimation = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: wrapperElement.value,
-      markers: true,
+      markers: false,
       invalidateOnRefresh: true,
       scrub: 1,
     },
