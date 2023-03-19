@@ -72,7 +72,7 @@ const initAnimation = () => {
   tl.to([stitle.value, title.value, subtitle.value, btnsContainer.value], {
     autoAlpha: 1,
     yPercent: 0,
-    stagger: 0.5,
+    stagger: 0.50
   }).to(heroText.value, {
     opacity: 1,
     yPercent: 0,

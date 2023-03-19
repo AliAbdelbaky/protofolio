@@ -76,8 +76,8 @@ const initAnimation = () => {
     );
     tl.to(imgs, {
       y: "-110%",
-      // stagger: (i, el) => parseFloat(el.getAttribute("data-speed")),
-      duration: (i, el) => 1 - parseFloat(el.getAttribute("data-speed")),
+      stagger: 0.50,
+      duration: (i, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * 100,
     });
   };
   const textAnimation = () => {
