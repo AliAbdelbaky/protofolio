@@ -1,9 +1,11 @@
 <template>
   <section class="work">
     <v-container fluid>
-      <div v-for="(item, index) in projects" :key="index">
-        <WorkCard :cardData="{ index, ...item }" />
-      </div>
+      <WorkCard
+        v-for="(item, index) in projects"
+        :key="index"
+        :cardData="{ index, ...item }"
+      />
     </v-container>
   </section>
 </template>
@@ -35,7 +37,6 @@ const projects = ref<SingleWork[]>([
     imgs: [mobile1, mobile2, mobile3, mobile4],
   },
 ]);
-
 </script>
 
 <style scoped lang="scss">

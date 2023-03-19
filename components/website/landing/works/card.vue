@@ -1,9 +1,12 @@
 <template>
   <div
-    class="flex md:items-stretch flex-col min-h-[50vh] md:min-h-full md:flex-row warpper i py-[8%] px-3 border-2"
+    class="flex md:items-stretch flex-col min-h-[50vh] md:min-h-full md:flex-row warpper transition-all i py-[8%] my-9 px-3"
     ref="wrapperElement"
   >
-    <div class="desc md:flex-1 flex md:items-center justify-start">
+    <div
+      class="desc md:flex-1 flex md:items-center justify-start opacity-0"
+      ref="textContainer"
+    >
       <div class="info-wrapper">
         <div class="text-container w-full h-full">
           <div class="sort py-2 px-4 font-bold">
@@ -26,7 +29,7 @@
       <div
         v-for="(_item, _index) in cardData.imgs"
         :key="_index"
-        class="_img-container max-w-xs max-h-80"
+        class="_img-container max-w-xs md:max-w-[50%] max-h-80"
         :data-speed="imgsSpeed[_index]"
       >
         <img :src="_item" class="w-full h-full object-contain max-h-80" />
@@ -42,7 +45,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 // @ts-ignore
 import { SingleWork } from "~~/assets/types/work.type";
-const imgsSpeed = [0.25, 0.4, 0.2, 0.1];
+const imgsSpeed = [0.5, 0.4, 0.5, 0.1];
 
 interface WorkType {
   cardData: SingleWork;
@@ -53,83 +56,48 @@ const props = defineProps<WorkType>();
 const wrapperElement = ref(null);
 // @ts-ignore
 const imageContainer = ref(null);
+// @ts-ignore
+const textContainer = ref(null);
 
 const initAnimation = () => {
+  const imgsAnimation = () => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power1.out" },
+      scrollTrigger: {
+        trigger: wrapperElement.value,
+        markers: false,
+        invalidateOnRefresh: true,
+        scrub: 3,
+      },
+    });
+    const imgs = gsap.utils.toArray(
+      // @ts-ignore
+      imageContainer.value?.querySelectorAll("._img-container")
+    );
+    tl.to(imgs, {
+      y: "-110%",
+      // stagger: (i, el) => parseFloat(el.getAttribute("data-speed")),
+      duration: (i, el) => 1 - parseFloat(el.getAttribute("data-speed")),
+    });
+  };
+  const textAnimation = () => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapperElement.value,
+        markers: false,
+        invalidateOnRefresh: true,
+        scrub: 3,
+      },
+    });
+    tl.to(textContainer.value, { opacity: 1 }, "-=1");
+  };
+
   gsap.registerPlugin(ScrollTrigger);
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: wrapperElement.value,
-      markers: false,
-      invalidateOnRefresh: true,
-      scrub: 1,
-    },
-  });
-  const imgs = gsap.utils.toArray(
-    imageContainer.value?.querySelectorAll("._img-container")
-  );
-  tl.to(imgs, {
-    y: "-100%",
-    ease: "easeInOut",
-    stagger: (i, el) => parseFloat(el.getAttribute("data-speed")),
-  });
-  // imgs.forEach((img, i) => {
-  //   tl.to(img, {
-  //     y: "-100%",
-  //     ease: "none",
-  //     stagger: 0.5,
-  //   });
-  // });
-
-  // tl.to(imgs, {
-  //   y: "100px",
-  //   ease: "none",
-
-  //   delay: (i, el) => parseFloat(el.getAttribute("data-speed")),
-  // });
-  // const wrapperArray = gsap.utils.toArray(
-  //   wrapperRef.value.querySelectorAll(".warpper")
-  // );
-  // const wrapper = wrapperRef.value.querySelectorAll(".pics ._img-container");
-  // gsap.to("[data-speed]", {
-  //   y: (i, el) =>
-  //     -(1 - parseFloat(el.getAttribute("data-speed"))) *
-  //     ScrollTrigger.maxScroll(wrapperRef.value),
-  //   ease: "none",
-  //   scrollTrigger: {
-  //     trigger: wrapperRef.value,
-  //     markers: true,
-  //     start: 0,
-  //     end: "max",
-  //     invalidateOnRefresh: true,
-  //     scrub: 4,
-  //   },
-  // });
-  // wrapperArray.forEach((wrapper, $wIndex) => {
-  //   const tl = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: wrapper,
-  //       markers: true,
-  //       start: 0,
-  //       end: "max",
-  //       invalidateOnRefresh: true,
-  //       scrub: 1,
-  //       pin: true,
-  //     },
-  //   });
-  //   const imgList = gsap.utils.toArray(
-  //     wrapper.querySelectorAll(".pics ._img-container")
-  //   );
-  //   tl.to(imgList, {
-  //     y: (i, el) =>
-  //       -(10 - parseFloat(el.getAttribute("data-speed"))) *
-  //       ScrollTrigger.maxScroll(wrapperRef.value),
-  //     ease: "none",
-  //   });
-  // });
+  imgsAnimation();
+  textAnimation();
 };
 // @ts-ignore
 onMounted(() => {
-  // requestAnimationFrame(initAnimation);
   initAnimation();
 });
 </script>
